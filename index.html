@@ -1,12 +1,919 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zahida Amina Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zahida Amina — Freelance Graphic & Web Designer | Portfolio & Resume</title>
+
+  <!-- Primary meta -->
+  <meta name="description" content="Zahida Amina — Freelance Graphic & Web Designer, Resume Writer, and BSCS student from Kasur, Pakistan. Portfolio, projects, skills, and contact." />
+  <meta name="author" content="Zahida Amina" />
+  <meta name="theme-color" content="#0f1724" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Zahida Amina — Portfolio & Resume" />
+  <meta property="og:description" content="Freelance Graphic & Web Designer | Resume Writer | Video Editor. Based in Kasur, Pakistan." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zahida Amina — Portfolio & Resume" />
+  <meta name="twitter:description" content="Freelance Graphic & Web Designer, Resume Writer, and Video Editor from Kasur, Pakistan." />
+
+  <!-- Basic styling reset + variables -->
+  <style>
+    /*
+      Clean, modern one-file CSS.
+      - Uses CSS variables for easy customization.
+      - Responsive grid with max-width constraint.
+      - Accessible colors and large tap targets.
+    */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#0066ff;
+      --accent-2:#00b894;
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      --max-width:1100px;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Basic reset */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(0,102,255,0.06), transparent 4%),
+        linear-gradient(180deg,#071023 0%, #071726 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .site{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+    }
+
+    /* Top header / nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--accent),#2dd4bf);
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+      font-weight:700;
+      color:white;
+      font-size:20px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:0.2px;
+    }
+    .brand p{ margin:0; font-size:12px; color:var(--muted) }
+
+    nav{
+      display:flex;
+      gap:10px;
+    }
+    .nav-link{
+      background:transparent;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:14px;
+      transition:all .18s ease;
+      border:1px solid transparent;
+    }
+    .nav-link:hover{ color:var(--accent); transform:translateY(-2px) }
+
+    /* Main grid layout: left column profile / right column content on wide screens */
+    .main{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    @media (max-width:980px){
+      .main{ grid-template-columns: 1fr; }
+      header{flex-direction:column; align-items:flex-start; gap:12px}
+    }
+
+    /* Left column - profile card */
+    .profile{
+      background:linear-gradient(180deg,var(--card), #071026);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow: 0 6px 30px rgba(3,10,20,0.6);
+      position:sticky;
+      top:24px;
+      height: fit-content;
+    }
+    .avatar{
+      width:100%;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .avatar .img{
+      width:92px;
+      height:92px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent), rgba(0,183,112,0.9));
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      font-size:28px;
+      color:white;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    .avatar h2{ margin:0; font-size:18px }
+    .meta{ color:var(--muted); font-size:13px; margin-top:6px }
+
+    .badge-list{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .badge{
+      background:var(--glass);
+      border-radius:10px;
+      padding:6px 8px;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .contact{
+      margin-top:16px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .contact a{
+      color:inherit;
+      text-decoration:none;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding:8px;
+      border-radius:8px;
+      transition:all .15s ease;
+      background:transparent;
+    }
+    .contact a:hover{ background:rgba(255,255,255,0.02) }
+
+    /* Right column - content sections */
+    .content{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 18px rgba(2,8,20,0.5);
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h3{ margin:0; font-size:18px }
+    .muted{ color:var(--muted); font-size:13px }
+
+    /* About / objective */
+    .about p{ margin:0 0 10px 0; color:#dbeafe }
+
+    /* Education timeline */
+    .timeline{ display:flex; flex-direction:column; gap:12px }
+    .timeline-item{
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .timeline-item .dot{
+      width:12px; height:12px; border-radius:50%;
+      background:var(--accent);
+      margin-top:6px;
+      flex-shrink:0;
+    }
+    .timeline-item .body{ flex:1 }
+    .timeline-item .body h4{ margin:0 0 6px 0 }
+    .timeline-item .body p{ margin:0; color:var(--muted) }
+
+    /* Skills grid */
+    .skills-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap:12px;
+    }
+    .skill{
+      padding:12px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.02);
+      font-size:13px;
+    }
+    .skill .label{ font-weight:600; margin-bottom:6px }
+    .skill .meter{
+      height:8px; background:rgba(255,255,255,0.04); border-radius:8px; overflow:hidden;
+    }
+    .meter > i{ display:block; height:100%; border-radius:8px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); width:60% }
+
+    /* Projects / gallery */
+    .projects-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:12px;
+    }
+    .project{
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      min-height:150px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:14px;
+      background:linear-gradient(120deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .project h4{ margin:0 0 6px 0 }
+    .project p{ margin:0; color:var(--muted); font-size:13px }
+
+    .cta-row{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:10px; font-weight:600;
+      background:linear-gradient(90deg,var(--accent),#2dd4bf);
+      color:white; border:none; cursor:pointer; text-decoration:none;
+      transition:transform .12s ease;
+    }
+    .btn:hover{ transform:translateY(-3px) }
+
+    .secondary{
+      background:transparent; border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+    }
+
+    /* Portfolio gallery placeholders: patterned SVG backgrounds */
+    .project .art{
+      position:absolute; inset:0; opacity:0.06; mix-blend-mode:screen;
+      background-repeat:no-repeat; background-position:center; background-size:cover;
+    }
+
+    /* Testimonials / references */
+    .testimonials{ display:grid; grid-template-columns:1fr; gap:12px }
+    .testimonial{ padding:14px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02) }
+
+    /* Contact form */
+    form{
+      display:grid; gap:12px;
+    }
+    .field{ display:flex; flex-direction:column; gap:6px }
+    input[type="text"], input[type="email"], textarea{
+      background:transparent; border:1px solid rgba(255,255,255,0.04); padding:10px; border-radius:8px; color:inherit;
+    }
+    textarea{ min-height:120px; resize:vertical }
+
+    footer{
+      margin-top:18px; text-align:center; color:var(--muted); font-size:13px;
+    }
+
+    /* Small utility classes */
+    .small{ font-size:12px; color:var(--muted) }
+    .flex{ display:flex; gap:8px; align-items:center }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap }
+    .pill{ padding:6px 8px; background:rgba(255,255,255,0.02); border-radius:8px; font-size:13px; color:var(--muted) }
+
+    /* subtle animations */
+    @keyframes float {
+      0%{ transform:translateY(0) }
+      50%{ transform:translateY(-6px) }
+      100%{ transform:translateY(0) }
+    }
+    .float{ animation:float 6s ease-in-out infinite }
+
+    /* Accessibility focus states */
+    a:focus, button:focus, input:focus, textarea:focus{ outline:3px solid rgba(0,102,255,0.18); outline-offset:2px }
+  </style>
+
+  <!-- Structured data for SEO: Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zahida Amina",
+    "jobTitle": "Freelance Graphic & Web Designer",
+    "description": "Freelance Graphic & Web Designer, Resume Writer, and Video Editor from Kasur, Pakistan. BSCS student with experience in design and frontend development.",
+    "url": "https://zahidaamina.github.io",
+    "sameAs": [
+      "https://www.linkedin.com/in/amina-bibi-40b110305/",
+      "https://www.behance.net/aminabibi13"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Qadiwind, Kasur",
+      "addressRegion": "Punjab",
+      "postalCode": "55051",
+      "addressCountry": "Pakistan"
+    },
+    "email": "aminabibihere@gmail.com",
+    "telephone": "+92-3012-4616015"
+  }
+  </script>
+
 </head>
 <body>
-  <h1>Welcome to Zahida Amina’s Portfolio</h1>
-  <p>This site is under construction. Stay tuned!</p>
+  <div class="site" id="top">
+    <header role="banner" class="site-header">
+      <div class="brand" aria-label="Brand">
+        <div class="logo" aria-hidden="true">ZA</div>
+        <div>
+          <h1>Zahida Amina</h1>
+          <p>Freelance Graphic & Web Designer · Resume Writer · Video Editor</p>
+        </div>
+      </div>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#education">Education</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main" role="main">
+      <!-- LEFT COLUMN: PROFILE / CONTACT -->
+      <aside class="profile" aria-labelledby="profile-heading">
+        <div class="avatar" role="img" aria-label="Profile visual">
+          <div class="img" title="Zahida A.">ZA</div>
+          <div>
+            <h2 id="profile-heading">Zahida Amina</h2>
+            <div class="meta">Freelance Graphic & Web Designer — Kasur, Pakistan</div>
+            <div class="meta small">BS Computer Science · BSCS (In progress)</div>
+          </div>
+        </div>
+
+        <div class="badge-list" aria-hidden="false" title="key services">
+          <div class="badge">Logo Design</div>
+          <div class="badge">Resume Writing</div>
+          <div class="badge">Web Design</div>
+          <div class="badge">Video Editing</div>
+          <div class="badge">Frontend: HTML & CSS</div>
+        </div>
+
+        <div class="contact" aria-label="Contact information">
+          <a href="mailto:aminabibihere@gmail.com" title="Email">
+            <!-- email icon (inline svg) -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>aminabibihere@gmail.com</span>
+          </a>
+
+          <a href="tel:+9230124616015" title="Phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M22 16.92V20a2 2 0 0 1-2.18 2A19 19 0 0 1 3 5.18 2 2 0 0 1 5 3h3.09a1 1 0 0 1 1 .75c.12.64.33 1.26.62 1.83a1 1 0 0 1-.24 1.05L8.91 8.91a15 15 0 0 0 6.18 6.18l1.28-1.28a1 1 0 0 1 1.05-.24c.57.29 1.19.5 1.83.62a1 1 0 0 1 .75 1z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>+92-3012-4616015</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/amina-bibi-40b110305/" target="_blank" rel="noopener" title="LinkedIn profile">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4.98 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 9h4v12H3zM9 9h3v1.71h.04A3.29 3.29 0 0 1 15.93 9c3.12 0 3.69 2.05 3.69 4.71V21h-4v-5.23c0-1.25-.02-2.86-1.75-2.86-1.76 0-2.03 1.37-2.03 2.78V21H9z" stroke="currentColor" stroke-width="0.6"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a href="https://www.behance.net/aminabibi13" target="_blank" rel="noopener" title="Behance portfolio">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="6.5" cy="11.5" r="3.5" stroke="currentColor" stroke-width="1.1" />
+              <path d="M21 9h-4.5v6H21z" stroke="currentColor" stroke-width="1.1" />
+              <path d="M11 9h-3v6h3c1.66 0 3-1.34 3-3s-1.34-3-3-3z" stroke="currentColor" stroke-width="1.1" />
+            </svg>
+            <span>Behance</span>
+          </a>
+
+          <a class="small" href="#contact" title="Scroll to contact">Contact / Hire Me</a>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="small">Address</div>
+          <div class="pill" style="margin-top:6px">Qadiwind, Tehsil & District Kasur (55051)</div>
+          <div class="small" style="margin-top:10px">CNIC</div>
+          <div class="pill">35102-2060060-0</div>
+        </div>
+
+        <div class="small" style="margin-top:12px">Quick actions</div>
+        <div class="cta-row" style="margin-top:8px">
+          <a class="btn" href="mailto:aminabibihere@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="#fff" stroke-width="1.3"/></svg> Email</a>
+          <a class="btn secondary" href="https://www.linkedin.com/in/amina-bibi-40b110305/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="small">Availability</div>
+          <div class="pill">Open for internship & freelance work</div>
+        </div>
+      </aside>
+
+      <!-- RIGHT COLUMN: CONTENT -->
+      <section class="content" aria-label="Main content area">
+        <!-- HERO / INTRO -->
+        <article class="card" id="about" aria-labelledby="about-title">
+          <div class="section-title">
+            <h3 id="about-title">About / Objective</h3>
+            <div class="muted">Profile & career objective</div>
+          </div>
+          <div class="about">
+            <p><strong>Objective:</strong> Aspiring software engineer seeking an internship opportunity to apply my knowledge and skills in computing, programming, and database management to real-world projects. Eager to contribute to a dynamic team and gain hands-on experience in software development.</p>
+
+            <p>I am a motivated BSCS student at Virtual University of Pakistan with hands-on experience in graphic design and frontend development. I blend technical knowledge in programming with creative design skills to create usable, visually appealing digital products and polished resumes. I enjoy learning new tools and have earned certifications from Cisco Networking Academy, DigiSkills.pk, LinkedIn, and Simplilearn.</p>
+
+            <p class="muted small">Pro tip: If you're viewing this on GitHub Pages, consider pinning this repository to your profile for easy access.</p>
+
+            <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
+              <a class="btn" href="#projects">View Projects</a>
+              <a class="btn secondary" href="#education">Education</a>
+              <a class="btn secondary" href="#contact">Hire Me</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- EDUCATION -->
+        <article class="card" id="education" aria-labelledby="edu-title">
+          <div class="section-title">
+            <h3 id="edu-title">Education</h3>
+            <div class="muted">Academic background and coursework</div>
+          </div>
+
+          <div class="timeline" style="margin-top:8px">
+            <div class="timeline-item">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="body">
+                <h4>BS Computer Science (2023 – Present)</h4>
+                <p class="muted">Virtual University of Pakistan — Current semester: 4th. CGPA (3rd semester): 2.99 / 4.00</p>
+                <p class="small" style="margin-top:6px">Relevant Coursework: Introduction to Computing, Object-Oriented Programming (OOP), Database Management Systems (DBMS), Assembly Language, Data Communication</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="body">
+                <h4>FSc. Pre-Engineering (2020 – 2022)</h4>
+                <p class="muted">Govt. Post Graduate Degree College, Kasur — BISE Lahore. Marks achieved: 691 / 1100</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="body">
+                <h4>Matriculation (2018 – 2020)</h4>
+                <p class="muted">Govt. Girls High School, Qadiwind, Kasur — BISE Lahore. Marks achieved: 779 / 1100</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SKILLS -->
+        <article class="card" id="skills" aria-labelledby="skills-title">
+          <div class="section-title">
+            <h3 id="skills-title">Skills & Tools</h3>
+            <div class="muted">Technical skills, programming, and design tools</div>
+          </div>
+
+          <div style="display:flex; gap:18px; flex-wrap:wrap">
+            <div style="flex:1; min-width:260px">
+              <h4 class="small" style="margin-bottom:10px">Programming Languages</h4>
+              <div class="skills-grid">
+                <div class="skill">
+                  <div class="label">C++</div>
+                  <div class="meter"><i style="width:72%"></i></div>
+                  <div class="small" style="margin-top:6px">Comfortable with OOP, console apps, and algorithms.</div>
+                </div>
+                <div class="skill">
+                  <div class="label">SQL</div>
+                  <div class="meter"><i style="width:64%"></i></div>
+                  <div class="small" style="margin-top:6px">Database design, queries, and CRUD operations.</div>
+                </div>
+                <div class="skill">
+                  <div class="label">HTML & CSS</div>
+                  <div class="meter"><i style="width:74%"></i></div>
+                  <div class="small" style="margin-top:6px">Responsive pages, GitHub Pages, basic JS.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:1; min-width:260px">
+              <h4 class="small" style="margin-bottom:10px">Tools & Design</h4>
+              <div class="skills-grid">
+                <div class="skill">
+                  <div class="label">Adobe Illustrator</div>
+                  <div class="meter"><i style="width:72%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="label">Adobe Photoshop</div>
+                  <div class="meter"><i style="width:76%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="label">Canva</div>
+                  <div class="meter"><i style="width:86%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="label">Cisco Packet Tracer</div>
+                  <div class="meter"><i style="width:58%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="label">MS Office (Word, Excel, PowerPoint)</div>
+                  <div class="meter"><i style="width:86%"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong class="small">Languages:</strong>
+            <div class="tags" style="margin-top:8px">
+              <span class="pill">English</span>
+              <span class="pill">Urdu</span>
+              <span class="pill">Punjabi</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECTS -->
+        <article class="card" id="projects" aria-labelledby="projects-title">
+          <div class="section-title">
+            <h3 id="projects-title">Projects & Portfolio</h3>
+            <div class="muted">Design samples, course projects, and practice work</div>
+          </div>
+
+          <p class="small" style="margin-bottom:10px">Note: Most graphic designs were created for learning and practice (Canva, Adobe). Some work was done for a client once — thumbnails, promotional images, and banners.</p>
+
+          <div class="projects-grid" aria-live="polite">
+            <!-- Project 1 -->
+            <article class="project" role="article" aria-labelledby="proj-1">
+              <div class="art" style="background-image: radial-gradient(circle at 20% 30%, rgba(0,102,255,0.12), transparent 10%), linear-gradient(120deg, rgba(0,0,0,0.2), rgba(255,255,255,0.02));"></div>
+              <h4 id="proj-1">Portfolio Website (This site)</h4>
+              <p>Personal GitHub Pages portfolio built with HTML & CSS — responsive and optimized for fast loading.</p>
+              <div style="margin-top:10px">
+                <a class="btn" href="https://zahidaamina.github.io" target="_blank" rel="noopener">Live</a>
+                <a class="btn secondary" href="#" onclick="alert('This repo is: zahidaamina.github.io');return false;">Repo</a>
+              </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project" role="article" aria-labelledby="proj-2">
+              <div class="art" style="background-image: linear-gradient(60deg, rgba(0,183,112,0.1), transparent);"></div>
+              <h4 id="proj-2">Graphic Design Collection (Canva & Adobe)</h4>
+              <p>Logos, social banners, and thumbnails produced during learning; shows layout and color understanding.</p>
+              <div style="margin-top:10px">
+                <a class="btn" href="https://www.behance.net/aminabibi13" target="_blank" rel="noopener">View on Behance</a>
+                <a class="btn secondary" href="#contact">Request Samples</a>
+              </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project" role="article" aria-labelledby="proj-3">
+              <div class="art" style="background-image: conic-gradient(from 120deg at 50% 50%, rgba(0,102,255,0.06), rgba(0,183,112,0.04));"></div>
+              <h4 id="proj-3">DBMS Project (Course)</h4>
+              <p>Designed and implemented a simple database for a hypothetical business using SQL; focused on schema design and queries.</p>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project" role="article" aria-labelledby="proj-4">
+              <div class="art" style="background-image: linear-gradient(120deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));"></div>
+              <h4 id="proj-4">OOP Console Applications</h4>
+              <p>Several small C++ console applications demonstrating OOP concepts: classes, inheritance, and encapsulation.</p>
+            </article>
+
+            <!-- Project 5 (Design Bundle example) -->
+            <article class="project" role="article" aria-labelledby="proj-5">
+              <div class="art" style="background-image: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.02), transparent 30%);"></div>
+              <h4 id="proj-5">Client Thumbnails & Promotional Graphics</h4>
+              <p>One-time client work: thumbnails and images for a single client project (various sizes and styles).</p>
+              <div style="margin-top:10px">
+                <a class="btn" href="#contact">Request similar work</a>
+              </div>
+            </article>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="muted small">Tip: I can provide unlisted sample packs on request — useful when hiring for design or content work.</div>
+          </div>
+        </article>
+
+        <!-- Certifications -->
+        <article class="card" id="certifications" aria-labelledby="cert-title">
+          <div class="section-title">
+            <h3 id="cert-title">Certifications</h3>
+            <div class="muted">Professional training and courses</div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <div class="body">
+                <h4>Introduction to Networks</h4>
+                <p class="muted">Cisco Networking Academy</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <div class="body">
+                <h4>Programming Essentials in C++</h4>
+                <p class="muted">Cisco Networking Academy</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <div class="body">
+                <h4>Video Editing, Animation & Vlogging</h4>
+                <p class="muted">DigiSkills.pk</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <div class="body">
+                <h4>Graphic Design</h4>
+                <p class="muted">LinkedIn Learning</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <div class="body">
+                <h4>UI/UX Design</h4>
+                <p class="muted">Simplilearn</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Projects deep dive + case study example -->
+        <article class="card" id="case-studies" aria-labelledby="case-title">
+          <div class="section-title">
+            <h3 id="case-title">Case Study — Client Thumbnails Package</h3>
+            <div class="muted">Design process and learning outcomes</div>
+          </div>
+
+          <div>
+            <p><strong>Context:</strong> One-time client requested a set of thumbnails and promotional images for online content. My role: design and deliver variations in multiple aspect ratios suitable for YouTube, Facebook, and Instagram.</p>
+
+            <h4 style="margin-top:12px">Process</h4>
+            <ol class="small" style="margin-top:8px">
+              <li>Gathered client brand colors, target audience, and tone preferences.</li>
+              <li>Prepared 3 initial mockups in Canva / Photoshop for feedback.</li>
+              <li>Iterated on typography, contrast, and focal points; delivered final PNGs and source files.</li>
+              <li>Provided scaled versions and simple guidelines for reuse.</li>
+            </ol>
+
+            <h4 style="margin-top:12px">Tools used</h4>
+            <div class="tags" style="margin-top:8px">
+              <span class="pill">Canva</span>
+              <span class="pill">Adobe Photoshop</span>
+              <span class="pill">Adobe Illustrator</span>
+            </div>
+
+            <h4 style="margin-top:12px">Outcome & Learning</h4>
+            <p class="small">Client was satisfied; the package improved click-through rates on thumbnails slightly (informal client feedback). This project strengthened my composition and rapid iteration skills.</p>
+          </div>
+        </article>
+
+        <!-- Testimonials / References -->
+        <article class="card" id="references" aria-labelledby="ref-title">
+          <div class="section-title">
+            <h3 id="ref-title">References & Availability</h3>
+            <div class="muted">Professional references available upon request</div>
+          </div>
+
+          <div class="testimonials">
+            <div class="testimonial">
+              <div class="flex" style="justify-content:space-between">
+                <div>
+                  <strong class="small">Reference</strong>
+                  <div class="small muted" style="margin-top:6px">Available upon request</div>
+                </div>
+                <div class="small muted">Open for internship & freelance</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="small" style="margin-top:8px">If you'd like references, please contact me and I will provide names and contact details with permission from referees.</p>
+        </article>
+
+        <!-- Contact -->
+        <article class="card" id="contact" aria-labelledby="contact-title">
+          <div class="section-title">
+            <h3 id="contact-title">Contact & Hire</h3>
+            <div class="muted">Reach out for internships, collaborations, and freelance work</div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 320px; gap:18px;">
+            <div>
+              <p class="small">Prefer email or LinkedIn for professional inquiries. If you'd like a quick quote for a design job, include project details, required sizes, and timeline.</p>
+
+              <!-- Contact form (simple; posts via mailto fallback) -->
+              <form id="contact-form" action="#" onsubmit="handleContactSubmit(event)">
+                <div class="field">
+                  <label for="name" class="small">Your name</label>
+                  <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+                </div>
+                <div class="field">
+                  <label for="email" class="small">Email</label>
+                  <input id="email" name="email" type="email" placeholder="jane@example.com" required>
+                </div>
+                <div class="field">
+                  <label for="message" class="small">Message</label>
+                  <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                </div>
+
+                <div style="display:flex; gap:8px; margin-top:8px">
+                  <button class="btn" type="submit">Send message</button>
+                  <a class="btn secondary" href="mailto:aminabibihere@gmail.com?subject=Project%20Inquiry%20-%20Website" target="_blank" rel="noopener">Email directly</a>
+                </div>
+
+                <div id="contact-status" class="small muted" style="margin-top:8px" aria-live="polite"></div>
+              </form>
+            </div>
+
+            <aside style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:12px; border-radius:10px;">
+              <div class="small"><strong>Quick contact</strong></div>
+              <div style="margin-top:8px">
+                <div class="small muted">Mobile</div>
+                <div class="pill">+92-3012-4616015</div>
+              </div>
+
+              <div style="margin-top:8px">
+                <div class="small muted">Email</div>
+                <div class="pill">aminabibihere@gmail.com</div>
+              </div>
+
+              <div style="margin-top:8px">
+                <div class="small muted">LinkedIn</div>
+                <a class="pill" href="https://www.linkedin.com/in/amina-bibi-40b110305/" target="_blank" rel="noopener">Amina Bibi (LinkedIn)</a>
+              </div>
+
+              <div style="margin-top:8px">
+                <div class="small muted">Portfolio (Behance)</div>
+                <a class="pill" href="https://www.behance.net/aminabibi13" target="_blank" rel="noopener">Behance gallery</a>
+              </div>
+
+              <div style="margin-top:8px">
+                <div class="small muted">Address</div>
+                <div class="pill">Qadiwind, Tehsil & District Kasur (55051)</div>
+              </div>
+
+              <div style="margin-top:10px">
+                <a class="btn" href="mailto:aminabibihere@gmail.com?subject=Hiring%20Zahida%20Amina">Hire me</a>
+                <a class="btn secondary" href="#top">Back to top</a>
+              </div>
+            </aside>
+          </div>
+        </article>
+
+        <!-- Footer -->
+        <footer>
+          <div class="small">© <strong>Zahida Amina</strong> — Designed & maintained by Zahida. Built with GitHub Pages.</div>
+          <div class="small muted" style="margin-top:6px">References available upon request. CNIC and full contact details included on this resume for official applications.</div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <!-- Minimal JS for interactions (in-file) -->
+  <script>
+    // Smooth scrolling for internal links
+    (function(){
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+        anchor.addEventListener('click', function(e){
+          var href = this.getAttribute('href');
+          if(href.length > 1){
+            e.preventDefault();
+            var el = document.querySelector(href);
+            if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        });
+      });
+    })();
+
+    // Contact form handler: constructs a mailto link so form works without server
+    function handleContactSubmit(e){
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var message = document.getElementById('message').value.trim();
+
+      if(!name || !email || !message){
+        document.getElementById('contact-status').textContent = 'Please fill all fields.';
+        return;
+      }
+
+      // Create subject and body; limit length to safe amount to avoid mailto overflow
+      var subject = encodeURIComponent('Website Contact: ' + name);
+      var body = encodeURIComponent(
+        'Name: ' + name + '\\n' +
+        'Email: ' + email + '\\n\\n' +
+        'Message: ' + '\\n' + message + '\\n\\n' +
+        '--- Sent from Zahida Amina portfolio site'
+      );
+
+      // Open mail client
+      var mailto = 'mailto:aminabibihere@gmail.com?subject=' + subject + '&body=' + body;
+      window.location.href = mailto;
+
+      // Provide user feedback
+      document.getElementById('contact-status').textContent = 'Opening your mail client...';
+    }
+
+    // Lightweight accessibility enhancement: announce focus changes
+    (function(){
+      var focusable = document.querySelectorAll('a, button, input, textarea');
+      focusable.forEach(function(el){
+        el.addEventListener('focus', function(){
+          // could add additional behavior; leaving minimal for performance
+        });
+      });
+    })();
+  </script>
+
+  <!-- Extra: long comment block with guidance for future edits (helps you or collaborators) -->
+  <!--
+    ========================================
+    HOW TO EDIT / CUSTOMIZE THIS SITE (quick guide)
+    ========================================
+
+    1. Replace text:
+       - Edit content in the HTML file for About, Projects, Education, and Contact.
+       - Keep semantic structure for accessibility.
+
+    2. Update contact details:
+       - email: aminabibihere@gmail.com
+       - phone: +92-3012-4616015
+       - LinkedIn: https://www.linkedin.com/in/amina-bibi-40b110305/
+       - Behance: https://www.behance.net/aminabibi13
+
+    3. Replace placeholder project tiles with images:
+       - Add images to the repository under /assets/ and reference them via <img> or background-image.
+       - For performance: use webp or optimized JPEGs. Keep under 300KB each for faster load.
+
+    4. Add CSS customizations:
+       - Modify :root color variables at the top of the <style> block.
+       - Change --max-width to widen/narrow the layout.
+
+    5. Optional: Use static site generator or Jekyll:
+       - If you want templating, convert to Jekyll or other SSG. For now it's pure HTML for simplicity.
+
+    6. Accessibility:
+       - Ensure images have alt attributes.
+       - Test with keyboard-only navigation and screen reader tools.
+
+    7. Version control:
+       - Keep this file in the root of 'zahidaamina.github.io' repo as index.html.
+       - Commit changes and push; GitHub Pages auto-deploys on push.
+
+    8. Future improvements:
+       - Add a downloadable PDF resume link (resume.pdf) and host in repo root.
+       - Add a gallery modal to show larger images of designs.
+       - Add Google Analytics / Search Console verification (opt-in).
+  -->
+
 </body>
 </html>
